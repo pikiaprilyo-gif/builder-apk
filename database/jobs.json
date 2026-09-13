@@ -1327,5 +1327,17 @@
     "status": "failed",
     "created_at": "2026-09-13T08:41:39.623Z",
     "completed_at": "2026-09-13T08:44:43.629Z"
+  },
+  "mtzld9y6a6d1m": {
+    "job_id": "mtzld9y6a6d1m",
+    "release_id": 387846133,
+    "release_tag": "build-mtzld9y6a6d1m",
+    "run_id": 34748320923,
+    "user_id": 1447587393,
+    "analyze_only": false,
+    "build_type": "release",
+    "status": "failed",
+    "created_at": "2026-09-13T09:08:35.293Z",
+    "completed_at": "2026-09-13T09:08:36.341Z"
   }
 }
