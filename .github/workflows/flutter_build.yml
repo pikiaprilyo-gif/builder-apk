@@ -1,0 +1,44 @@
+name: flutter_build
+on:
+  workflow_dispatch:
+    inputs:
+      project_url:
+        required: false
+        type: string
+      file_name:
+        required: false
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Download Project
+        run: |
+          echo "Downloading ${{ inputs.project_url }}"
+          curl -L -o project.zip "${{ inputs.project_url }}" || echo "skip download"
+          if [ -f project.zip ]; then unzip -o project.zip; fi
+          ls -la
+
+      - name: Build APK
+        run: flutter build apk --release
+
+      - name: Upload APK to Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: build-${{ github.run_number }}
+          files: build/app/outputs/flutter-apk/app-release.apk
